@@ -158,6 +158,17 @@ private
 <-cancel-S ltS = ltS
 <-cancel-S (ltSR lt) = <-trans ltS lt
 
+<-ap-S-right : {m n : ℕ} → m < n → m < S n
+<-ap-S-right x = ltSR x
+
+<-weaken-S : {m n : ℕ} → S m < n → m < n
+<-weaken-S ltS = ltSR ltS
+<-weaken-S (ltSR x) = ltSR (<-weaken-S x)
+
+<-cancel-S-left : {m n : ℕ} → S m < S n → m < S n
+<-cancel-S-left ltS = ltSR ltS
+<-cancel-S-left (ltSR p) = ltSR (<-weaken-S p)
+
 ≤-cancel-S : {m n : ℕ} → S m ≤ S n → m ≤ n
 ≤-cancel-S (inl p) = inl (ap ℕ-pred p)
 ≤-cancel-S (inr lt) = inr (<-cancel-S lt)
